@@ -27,7 +27,9 @@ function Carousel({ slides }) {
         <CarouselControlPanel
           incSlideIndex={incSlideIndex}
           decSlideIndex={decSlideIndex}
-        />
+        >
+          <span>{currentSlideIndex + 1}</span>
+        </CarouselControlPanel>
       </article>
     </>
   );

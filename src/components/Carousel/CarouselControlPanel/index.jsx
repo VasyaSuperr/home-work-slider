@@ -1,7 +1,8 @@
-function CarouselControlPanel({ decSlideIndex, incSlideIndex }) {
+function CarouselControlPanel({ decSlideIndex, incSlideIndex, children }) {
   return (
     <>
       <button onClick={() => decSlideIndex()}>{"<"}</button>
+      {children}
       <button onClick={() => incSlideIndex()}>{">"}</button>
     </>
   );
