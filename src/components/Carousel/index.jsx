@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import Slide from "./Slide";
 import CarouselControlPanel from "./CarouselControlPanel";
 
@@ -18,8 +19,6 @@ function Carousel({ slides }) {
     );
   };
 
-  useEffect(() => {}, [currentSlideIndex]);
-
   return (
     <>
       <article>
@@ -35,14 +34,14 @@ function Carousel({ slides }) {
   );
 }
 
-// Carousel.propTypes = {
-//   slide: propTypes.arrayOf(
-//     PropTypes.shape({
-//       title: PropTypes.string,
-//       description: PropTypes.string,
-//       src: PropTypes.string,
-//     })
-//   ).isRequired,
-// };
+Carousel.propTypes = {
+  slides: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string,
+      description: PropTypes.string,
+      src: PropTypes.string,
+    })
+  ).isRequired,
+};
 
 export default Carousel;
