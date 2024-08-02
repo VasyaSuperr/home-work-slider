@@ -1,37 +1,50 @@
-import React, { useEffect, useState } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Slide from "./Slide";
 import CarouselControlPanel from "./CarouselControlPanel";
 
-function Carousel({ slides }) {
-  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+class Carousel extends Component {
+  constructor(props) {
+    super(props);
 
-  const incSlideIndex = () => {
-    setCurrentSlideIndex(
-      (currentSlideIndex) => (currentSlideIndex + 1) % slides.length
-    );
+    this.state = {
+      currentSlideIndex: 0,
+    };
+  }
+
+  incSlideIndex = () => {
+    this.setState((prevState) => ({
+      currentSlideIndex:
+        (prevState.currentSlideIndex + 1) % this.props.slides.length,
+    }));
   };
 
-  const decSlideIndex = () => {
-    setCurrentSlideIndex(
-      (currentSlideIndex) =>
-        (currentSlideIndex - 1 + slides.length) % slides.length
-    );
+  decSlideIndex = () => {
+    this.setState((prevState) => ({
+      currentSlideIndex:
+        (prevState.currentSlideIndex - 1 + this.props.slides.length) %
+        this.props.slides.length,
+    }));
   };
 
-  return (
-    <>
-      <article>
-        <Slide slide={slides[currentSlideIndex]} />
-        <CarouselControlPanel
-          incSlideIndex={incSlideIndex}
-          decSlideIndex={decSlideIndex}
-        >
-          <span>{currentSlideIndex + 1}</span>
-        </CarouselControlPanel>
-      </article>
-    </>
-  );
+  render() {
+    const { slides } = this.props;
+    const { currentSlideIndex } = this.state;
+
+    return (
+      <>
+        <article>
+          <Slide slide={slides[currentSlideIndex]} />
+          <CarouselControlPanel
+            incSlideIndex={this.incSlideIndex}
+            decSlideIndex={this.decSlideIndex}
+          >
+            <span>{currentSlideIndex + 1}</span>
+          </CarouselControlPanel>
+        </article>
+      </>
+    );
+  }
 }
 
 Carousel.propTypes = {
